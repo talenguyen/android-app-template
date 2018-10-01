@@ -1,4 +1,4 @@
-package com.besimplify.android.stackoverflowuser.features.core
+package com.besimplify.android.stackoverflowuser.core
 
 import android.os.Bundle
 import android.os.Parcelable
