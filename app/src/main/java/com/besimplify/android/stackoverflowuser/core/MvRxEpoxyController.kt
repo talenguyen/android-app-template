@@ -1,4 +1,4 @@
-package com.besimplify.android.stackoverflowuser.features.core
+package com.besimplify.android.stackoverflowuser.core
 
 import com.airbnb.epoxy.AsyncEpoxyController
 import com.airbnb.epoxy.EpoxyController
