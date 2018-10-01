@@ -1,8 +1,10 @@
 package com.besimplify.android.stackoverflowuser.features.userdetail
 
-import com.airbnb.mvrx.BaseMvRxFragment
+import com.besimplify.android.stackoverflowuser.features.core.BaseFragment
+import com.besimplify.android.stackoverflowuser.features.core.MvRxEpoxyController
 
-class UserDetailFragment : BaseMvRxFragment() {
-  override fun invalidate() {
+class UserDetailFragment : BaseFragment() {
+  override fun epoxyController(): MvRxEpoxyController {
+    TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
   }
 }
