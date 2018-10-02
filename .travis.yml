@@ -10,7 +10,11 @@ android:
   - extra-android-m2repository
   - extra-android-support
   - extra-google-m2repository
-
+  
+  licenses:
+  - 'android-sdk-license-.+'
+  - 'google-gdk-license-.+'
+  
 jdk:
 - oraclejdk8
 
