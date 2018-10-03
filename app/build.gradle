@@ -46,6 +46,7 @@ dependencies {
   implementation "org.koin:koin-android-architecture:$koinVersion"
   implementation "android.arch.navigation:navigation-fragment-ktx:$navVersion"
   implementation "android.arch.navigation:navigation-ui-ktx:$navVersion"
+  implementation 'com.squareup.picasso:picasso:2.71828'
   testImplementation 'junit:junit:4.12'
   androidTestImplementation('com.android.support.test:runner:1.0.2') { exclude group: 'com.androi.support' }
   androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
