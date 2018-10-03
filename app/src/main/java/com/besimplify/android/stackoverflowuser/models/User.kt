@@ -17,7 +17,7 @@ data class User(
   val reputation: Long,
 
   @Json(name = "last_access_date")
-  val lastAccessDate: String,
+  val lastAccessDate: Long,
 
   @Json(name = "location")
   val location: String = ""
