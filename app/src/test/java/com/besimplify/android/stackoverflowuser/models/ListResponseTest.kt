@@ -11,10 +11,13 @@ import org.junit.Test
 
 class ListResponseTest {
 
+  private val moshi = Moshi.Builder()
+    .add(KotlinJsonAdapterFactory())
+    .build()
+
   @Test
   fun parseUserList() {
-    val file = resourcesFile("users.json")
-    val userListResponse = userListAdapter().fromJson(file.asBufferedSources())
+    val userListResponse = userListAdapter().fromJson(resourcesFile("users.json").asBufferedSources())
     Assert.assertNotNull(userListResponse)
     Assert.assertEquals(30, userListResponse?.items?.size)
     Assert.assertEquals(
@@ -30,11 +33,32 @@ class ListResponseTest {
     )
   }
 
+  @Test
+  fun parseReputationHistoryList() {
+    val reputationHistoryListResponse =
+      reputationHistoryListAdapter().fromJson(resourcesFile("reputation_histories.json").asBufferedSources())
+
+    Assert.assertNotNull(reputationHistoryListResponse)
+    Assert.assertEquals(30, reputationHistoryListResponse?.items?.size)
+    Assert.assertEquals(
+      ReputationHistory(
+        "post_upvoted",
+        22656,
+        8544460,
+        0,
+        1538405612
+      ),
+      reputationHistoryListResponse?.items?.get(0)
+    )
+  }
+
   private fun userListAdapter(): JsonAdapter<ListResponse<User>> {
-    val moshi = Moshi.Builder()
-      .add(KotlinJsonAdapterFactory())
-      .build()
-    val listMyData = Types.newParameterizedType(ListResponse::class.java, User::class.java)
-    return moshi.adapter(listMyData)
+    val listResponse = Types.newParameterizedType(ListResponse::class.java, User::class.java)
+    return moshi.adapter(listResponse)
+  }
+
+  private fun reputationHistoryListAdapter(): JsonAdapter<ListResponse<ReputationHistory>> {
+    val listResponse = Types.newParameterizedType(ListResponse::class.java, ReputationHistory::class.java)
+    return moshi.adapter(listResponse)
   }
 }
