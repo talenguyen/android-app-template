@@ -6,7 +6,8 @@ import com.squareup.moshi.JsonAdapter
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.Types
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
-import org.junit.*
+import org.junit.Test
+import org.junit.Assert
 
 class ListResponseTest {
 
