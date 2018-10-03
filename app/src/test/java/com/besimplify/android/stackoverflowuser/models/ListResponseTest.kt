@@ -1,22 +1,20 @@
 package com.besimplify.android.stackoverflowuser.models
 
+import com.besimplify.android.stackoverflowuser.util.asBufferedSources
+import com.besimplify.android.stackoverflowuser.util.resourcesFile
 import com.squareup.moshi.JsonAdapter
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.Types
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
-import okio.Okio
 import org.junit.Assert
 import org.junit.Test
-import java.io.File
 
 class ListResponseTest {
 
   @Test
   fun parseUserList() {
-    val classLoader = javaClass.classLoader
-    val resource = classLoader.getResource("users.json")
-    val file = File(resource.path)
-    val userListResponse = userListAdapter().fromJson(Okio.buffer(Okio.source(file)))
+    val file = resourcesFile("users.json")
+    val userListResponse = userListAdapter().fromJson(file.asBufferedSources())
     Assert.assertNotNull(userListResponse)
     Assert.assertEquals(30, userListResponse?.items?.size)
     Assert.assertEquals(
