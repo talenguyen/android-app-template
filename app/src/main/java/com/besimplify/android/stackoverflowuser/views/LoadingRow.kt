@@ -14,6 +14,6 @@ class LoadingRow @JvmOverloads constructor(
 ) : FrameLayout(context, attrs, defStyleAttr) {
 
   init {
-    inflate(context, R.layout.row_loading, this)
+    inflate(context, R.layout.loading_row, this)
   }
 }
