@@ -10,7 +10,7 @@
       android:id="@+id/profileImageView"
       android:layout_width="88dp"
       android:layout_height="88dp"
-      android:layout_marginStart="16dp"
+      android:layout_marginStart="12dp"
       android:layout_marginTop="4dp"
       android:contentDescription="@null"
       app:layout_constraintStart_toStartOf="parent"
