@@ -1,4 +1,4 @@
-package com.besimplify.android.stackoverflowuser.features.userlist
+package com.besimplify.android.stackoverflowuser.core
 
 import com.airbnb.mvrx.Fail
 import com.airbnb.mvrx.Success
@@ -17,24 +17,24 @@ import io.reactivex.Observable
 import org.junit.Rule
 import org.junit.Test
 
-class UserListViewModelTest {
+class ListViewModelTest {
   // A rule that makes all subscriptions to be subscribed and observed on a trampoline scheduler
   @get:Rule
   val rxSchedulersOverrideRule = RxSchedulersOverrideRule()
 
   private val stackOverflowService: StackOverflowService = mock()
-  private val mockUsers = mockUserListResponse().items
-  private val mockUsersPage1 = mockUsers.take(15)
-  private val mockUsersPage2 = mockUsers.takeLast(mockUsers.size - 15)
+  private val mockList = mockUserListResponse().items
+  private val mockListPage1 = mockList.take(15)
+  private val mockListPage2 = mockList.takeLast(mockList.size - 15)
 
   @Test
   fun fetchFirstPageError() {
     mockError(1)
 
-    val tested = UserListViewModel(UserListState(), stackOverflowService, true)
+    val tested = makeListViewModel()
 
     withState(tested) {
-      assertThat(it.usersRequest is Fail).isTrue()
+      assertThat(it.listRequest is Fail).isTrue()
     }
   }
 
@@ -42,11 +42,11 @@ class UserListViewModelTest {
   fun fetchFirstPageSuccess() {
     mockSuccess(1)
 
-    val tested = UserListViewModel(UserListState(), stackOverflowService, true)
+    val tested = makeListViewModel()
 
     withState(tested) {
-      assertThat(it.usersRequest is Success).isTrue()
-      assertThat(it.users).isEqualTo(mockUsersPage1)
+      assertThat(it.listRequest is Success).isTrue()
+      assertThat(it.list).isEqualTo(mockListPage1)
     }
   }
 
@@ -59,14 +59,14 @@ class UserListViewModelTest {
     mockError(2)
 
     // First page success
-    val tested = UserListViewModel(UserListState(), stackOverflowService, true)
+    val tested = makeListViewModel()
 
     // Load second page
     tested.fetchNextPage()
 
     withState(tested) {
-      assertThat(it.users).isEqualTo(mockUsersPage1)
-      assertThat(it.usersRequest is Fail).isTrue()
+      assertThat(it.list).isEqualTo(mockListPage1)
+      assertThat(it.listRequest is Fail).isTrue()
     }
   }
 
@@ -79,21 +79,27 @@ class UserListViewModelTest {
     mockSuccess(2)
 
     // First page success
-    val tested = UserListViewModel(UserListState(), stackOverflowService, true)
+    val tested = makeListViewModel()
 
     // Load second page
     tested.fetchNextPage()
 
     withState(tested) {
-      assertThat(it.users).isEqualTo(mockUsersPage1 + mockUsersPage2)
-      assertThat(it.usersRequest is Success).isTrue()
+      assertThat(it.list).isEqualTo(mockListPage1 + mockListPage2)
+      assertThat(it.listRequest is Success).isTrue()
+    }
+  }
+
+  private fun makeListViewModel(): ListViewModel<User> {
+    return object : ListViewModel<User>(ListState(), true) {
+      override fun fetchList(page: Int): Observable<ListResponse<User>> = stackOverflowService.users(page = page)
     }
   }
 
   private fun mockSuccess(page: Int) {
     val response: ListResponse<User> = when (page) {
-      1 -> ListResponse(true, mockUsersPage1)
-      else -> ListResponse(false, mockUsersPage2)
+      1 -> ListResponse(true, mockListPage1)
+      else -> ListResponse(false, mockListPage2)
     }
 
     whenever(stackOverflowService.users(any(), eq(page), any()))
