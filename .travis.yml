@@ -31,9 +31,12 @@ notifications:
 
 jobs:
   include:
-  - stage: test
+  - stage: check
     name: Lint
     script: "./gradlew ktlint"
+  - state: test
+    name: Unit Test
+    script: "./gradlew testDebugUnitTest"
 
 sudo: false
 
