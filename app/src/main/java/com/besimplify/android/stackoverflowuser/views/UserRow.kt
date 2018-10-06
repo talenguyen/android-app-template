@@ -6,6 +6,7 @@ import android.support.constraint.ConstraintLayout
 import android.util.AttributeSet
 import android.widget.ImageView
 import android.widget.TextView
+import com.airbnb.epoxy.CallbackProp
 import com.airbnb.epoxy.ModelProp
 import com.airbnb.epoxy.ModelView
 import com.besimplify.android.stackoverflowuser.R
@@ -60,5 +61,10 @@ class UserRow @JvmOverloads constructor(
   @ModelProp
   fun setLastAccessDate(lastAccessDate: String) {
     lastAccessDateTextView.text = lastAccessDate
+  }
+
+  @CallbackProp
+  override fun setOnClickListener(l: OnClickListener?) {
+    super.setOnClickListener(l)
   }
 }
