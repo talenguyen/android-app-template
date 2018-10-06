@@ -6,9 +6,14 @@ import com.airbnb.epoxy.EpoxyController
 import com.airbnb.mvrx.args
 import com.airbnb.mvrx.fragmentViewModel
 import com.besimplify.android.stackoverflowuser.core.ListFragment
+import com.besimplify.android.stackoverflowuser.extensions.formatDate
+import com.besimplify.android.stackoverflowuser.extensions.formatTime
 import com.besimplify.android.stackoverflowuser.models.ReputationHistory
 import com.besimplify.android.stackoverflowuser.models.User
+import com.besimplify.android.stackoverflowuser.views.dateRow
+import com.besimplify.android.stackoverflowuser.views.reputationHistoryRow
 import vn.tiki.android.di.TikiDi
+import java.util.Date
 
 class ReputationHistoryListFragment : ListFragment<ReputationHistory>() {
 
@@ -31,6 +36,27 @@ class ReputationHistoryListFragment : ListFragment<ReputationHistory>() {
     toolbar.title = user.name
   }
 
-  override fun EpoxyController.renderItem(item: ReputationHistory) {
+  override fun EpoxyController.renderList(list: List<ReputationHistory>) {
+    list
+      .sortedBy { it.creationDate }
+      .groupBy { Date(user.lastAccessDate * 1000).formatDate() }
+      .entries
+      .forEach {
+        dateRow {
+          id("dateRow.${it.key}")
+          dateText(it.key)
+        }
+
+        it.value
+          .forEachIndexed { index, reputationHistory ->
+            reputationHistoryRow {
+              id("reputation_history.$index")
+              reputationChange(reputationHistory.reputationChange)
+              type(reputationHistory.type)
+              postId("${reputationHistory.postId}")
+              lastAccessDate(Date(reputationHistory.creationDate * 1000).formatTime())
+            }
+          }
+      }
   }
 }
