@@ -1,7 +1,10 @@
 package com.besimplify.android.stackoverflowuser.models
 
+import android.os.Parcelable
 import com.squareup.moshi.Json
+import kotlinx.android.parcel.Parcelize
 
+@Parcelize
 data class User(
 
   @Json(name = "user_id")
@@ -21,4 +24,4 @@ data class User(
 
   @Json(name = "location")
   val location: String = ""
-)
+) : Parcelable

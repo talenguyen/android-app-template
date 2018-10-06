@@ -28,6 +28,7 @@ class UserListFragment : ListFragment<User>() {
       reputation("${item.reputation}")
       location(item.location)
       lastAccessDate(Date(item.lastAccessDate).format())
+      onClickListener { _ -> navigateTo(R.id.action_userList_to_reputationHistory, item) }
     }
   }
 }

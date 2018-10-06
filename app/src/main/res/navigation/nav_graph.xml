@@ -1,22 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    app:startDestination="@id/userList">
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            app:startDestination="@id/userList">
 
   <fragment
       android:id="@+id/userList"
       android:name="com.besimplify.android.stackoverflowuser.features.userlist.UserListFragment">
     <action
-        android:id="@+id/action_userList_to_userDetailFragment"
-        app:destination="@id/userDetailFragment"
+        android:id="@+id/action_userList_to_reputationHistory"
+        app:destination="@id/reputationHistory"
         app:enterAnim="@anim/anim_enter"
         app:exitAnim="@anim/anim_exit"
         app:popEnterAnim="@anim/anim_pop_enter"
-        app:popExitAnim="@anim/anim_pop_exit" />
+        app:popExitAnim="@anim/anim_pop_exit"/>
   </fragment>
 
   <fragment
-      android:id="@+id/userDetailFragment"
-      android:name="com.besimplify.android.stackoverflowuser.features.userdetail.UserDetailFragment" />
+      android:id="@+id/reputationHistory"
+      android:name="com.besimplify.android.stackoverflowuser.features.reputationhistorylist.ReputationHistoryListFragment"/>
 
 </navigation>
