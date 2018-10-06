@@ -3,8 +3,11 @@ package com.besimplify.android.stackoverflowuser.core
 import android.os.Bundle
 import android.view.View
 import com.airbnb.epoxy.EpoxyController
+import com.airbnb.mvrx.Fail
 import com.airbnb.mvrx.Loading
 import com.airbnb.mvrx.Success
+import com.besimplify.android.stackoverflowuser.R
+import com.besimplify.android.stackoverflowuser.views.errorRow
 import com.besimplify.android.stackoverflowuser.views.loadingRow
 
 abstract class ListFragment<T> : BaseFragment() {
@@ -20,8 +23,17 @@ abstract class ListFragment<T> : BaseFragment() {
 
   override fun epoxyController() = simpleController(viewModel) { state ->
     val listRequest = state.listRequest
-    if (state.page == 0 && listRequest is Loading) {
-      loadingRow { id("loading") }
+    if (state.page == 0) {
+      if (listRequest is Loading) {
+        loadingRow { id("loading") }
+      } else if (listRequest is Fail) {
+        errorRow {
+          id("error")
+          errorIcon(R.drawable.ic_error_black_24dp)
+          errorMessage(R.string.error_message)
+          onClickListener { _ -> viewModel.fetchNextPage() }
+        }
+      }
     }
 
     state.list.forEach { item ->
