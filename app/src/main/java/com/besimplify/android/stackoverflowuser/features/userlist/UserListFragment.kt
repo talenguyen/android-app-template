@@ -22,12 +22,12 @@ class UserListFragment : ListFragment<User>() {
 
   override fun EpoxyController.renderItem(item: User) {
     userRow {
-      id(item.id)
+      id("user.${item.id}")
       profileImage(item.profileImage)
       displayName(item.name)
       reputation("${item.reputation}")
       location(item.location)
-      lastAccessDate(Date(item.lastAccessDate).format())
+      lastAccessDate(Date(item.lastAccessDate * 1000).format())
       onClickListener { _ -> navigateTo(R.id.action_userList_to_reputationHistory, item) }
     }
   }
