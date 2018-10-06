@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    tools:parentTag="android.support.constraint.ConstraintLayout">
+
+  <ImageView
+      android:id="@+id/profileImageView"
+      android:layout_width="88dp"
+      android:layout_height="88dp"
+      android:layout_marginStart="12dp"
+      android:layout_marginTop="4dp"
+      android:contentDescription="@null"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toTopOf="@+id/displayNameTextView" />
+
+  <TextView
+      android:id="@+id/displayNameTextView"
+      android:layout_width="0dp"
+      android:layout_height="wrap_content"
+      android:layout_marginEnd="16dp"
+      android:layout_marginStart="8dp"
+      android:layout_marginTop="8dp"
+      android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toEndOf="@+id/profileImageView"
+      app:layout_constraintTop_toTopOf="parent"
+      tools:text="Giang Nguyen" />
+
+  <TextView
+      android:id="@+id/reputationTextView"
+      android:layout_width="0dp"
+      android:layout_height="wrap_content"
+      android:layout_marginEnd="16dp"
+      android:layout_marginTop="4dp"
+      android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toStartOf="@+id/displayNameTextView"
+      app:layout_constraintTop_toBottomOf="@+id/displayNameTextView"
+      tools:text="10000" />
+
+  <TextView
+      android:id="@+id/locationTextView"
+      android:layout_width="0dp"
+      android:layout_height="wrap_content"
+      android:layout_marginEnd="16dp"
+      android:layout_marginTop="4dp"
+      android:drawablePadding="4dp"
+      android:drawableStart="@drawable/ic_location_black_12dp"
+      android:gravity="center_vertical"
+      android:textAppearance="@style/TextAppearance.AppCompat.Caption"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toStartOf="@+id/displayNameTextView"
+      app:layout_constraintTop_toBottomOf="@+id/reputationTextView"
+      tools:text="Ho Chi Minh city" />
+
+  <TextView
+      android:id="@+id/lastAccessDateTextView"
+      android:layout_width="0dp"
+      android:layout_height="wrap_content"
+      android:layout_marginEnd="16dp"
+      android:layout_marginTop="4dp"
+      android:drawablePadding="4dp"
+      android:drawableStart="@drawable/ic_event_black_12dp"
+      android:gravity="center_vertical"
+      android:textAppearance="@style/TextAppearance.AppCompat.Caption"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toStartOf="@+id/displayNameTextView"
+      app:layout_constraintTop_toBottomOf="@+id/locationTextView"
+      tools:text="10/03/2018" />
+
+  <android.support.constraint.Barrier
+      android:id="@+id/barrier2"
+      android:layout_width="0dp"
+      android:layout_height="wrap_content"
+      app:barrierDirection="bottom"
+      app:constraint_referenced_ids="lastAccessDateTextView,profileImageView"
+      app:layout_constraintBottom_toBottomOf="parent"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toBottomOf="@+id/profileImageView" />
+
+  <View
+      android:id="@+id/bottomAnchor"
+      android:layout_width="1dp"
+      android:layout_height="1dp"
+      android:layout_marginTop="12dp"
+      app:layout_constraintTop_toBottomOf="@+id/barrier2" />
+
+</merge>
