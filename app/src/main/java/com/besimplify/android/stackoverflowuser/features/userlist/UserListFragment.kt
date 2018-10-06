@@ -6,7 +6,7 @@ import com.airbnb.epoxy.EpoxyController
 import com.airbnb.mvrx.fragmentViewModel
 import com.besimplify.android.stackoverflowuser.R
 import com.besimplify.android.stackoverflowuser.core.ListFragment
-import com.besimplify.android.stackoverflowuser.extensions.format
+import com.besimplify.android.stackoverflowuser.extensions.formatDate
 import com.besimplify.android.stackoverflowuser.models.User
 import com.besimplify.android.stackoverflowuser.views.userRow
 import java.util.Date
@@ -28,7 +28,7 @@ class UserListFragment : ListFragment<User>() {
         displayName(user.name)
         reputation("${user.reputation}")
         location(user.location)
-        lastAccessDate(Date(user.lastAccessDate * 1000).format())
+        lastAccessDate(Date(user.lastAccessDate * 1000).formatDate())
         onClickListener { _ -> navigateTo(R.id.action_userList_to_reputationHistory, user) }
       }
     }
