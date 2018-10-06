@@ -20,15 +20,17 @@ class UserListFragment : ListFragment<User>() {
     toolbar.title = getString(R.string.app_name)
   }
 
-  override fun EpoxyController.renderItem(item: User) {
-    userRow {
-      id("user.${item.id}")
-      profileImage(item.profileImage)
-      displayName(item.name)
-      reputation("${item.reputation}")
-      location(item.location)
-      lastAccessDate(Date(item.lastAccessDate * 1000).format())
-      onClickListener { _ -> navigateTo(R.id.action_userList_to_reputationHistory, item) }
+  override fun EpoxyController.renderList(list: List<User>) {
+    list.forEach { user ->
+      userRow {
+        id("user.${user.id}")
+        profileImage(user.profileImage)
+        displayName(user.name)
+        reputation("${user.reputation}")
+        location(user.location)
+        lastAccessDate(Date(user.lastAccessDate * 1000).format())
+        onClickListener { _ -> navigateTo(R.id.action_userList_to_reputationHistory, user) }
+      }
     }
   }
 }
