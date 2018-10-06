@@ -1,3 +1,4 @@
 <resources>
   <string name="app_name">StackOverFlowUser</string>
+  <string name="error_message">Error occurred. Touch me to try again.</string>
 </resources>
