@@ -12,7 +12,8 @@ data class ListState<T>(
   val page: Int = 0,
   val list: List<T> = emptyList(),
   val listRequest: Async<ListResponse<T>> = Uninitialized,
-  val hasMore: Boolean = false
+  val hasMore: Boolean = false,
+  val isConnected: Boolean = false
 ) : MvRxState
 
 abstract class ListViewModel<T>(
@@ -25,6 +26,8 @@ abstract class ListViewModel<T>(
   }
 
   protected abstract fun fetchList(page: Int): Observable<ListResponse<T>>
+
+  fun setIsConnected(isConnected: Boolean) = setState { copy(isConnected = isConnected) }
 
   fun fetchNextPage() = withState { state ->
     if (state.listRequest is Loading) return@withState
