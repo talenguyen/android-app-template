@@ -5,7 +5,6 @@ import android.view.View
 import com.airbnb.epoxy.EpoxyController
 import com.airbnb.mvrx.Fail
 import com.airbnb.mvrx.Loading
-import com.airbnb.mvrx.Success
 import com.besimplify.android.stackoverflowuser.R
 import com.besimplify.android.stackoverflowuser.views.errorRow
 import com.besimplify.android.stackoverflowuser.views.loadingRow
@@ -40,7 +39,7 @@ abstract class ListFragment<T> : BaseFragment() {
       renderItem(item)
     }
 
-    if (listRequest is Success && listRequest().hasMore) {
+    if (state.hasMore) {
       loadingRow {
         // Changing the ID will force it to rebind when new data is loaded even if it is
         // still on screen which will ensure that we trigger loading again.

@@ -11,7 +11,8 @@ import io.reactivex.Observable
 data class ListState<T>(
   val page: Int = 0,
   val list: List<T> = emptyList(),
-  val listRequest: Async<ListResponse<T>> = Uninitialized
+  val listRequest: Async<ListResponse<T>> = Uninitialized,
+  val hasMore: Boolean = false
 ) : MvRxState
 
 abstract class ListViewModel<T>(
@@ -33,7 +34,8 @@ abstract class ListViewModel<T>(
       copy(
         page = if (it is Success) nextPage else page,
         list = list + (it()?.items ?: emptyList()),
-        listRequest = it
+        listRequest = it,
+        hasMore = it()?.hasMore ?: hasMore
       )
     }
   }
