@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    tools:parentTag="android.support.constraint.ConstraintLayout">
+
+  <TextView
+      android:id="@+id/typeTextView"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginStart="16dp"
+      android:layout_marginTop="12dp"
+      android:textAppearance="@style/TextAppearance.AppCompat.Small"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toTopOf="parent"
+      tools:text="upvote" />
+
+  <TextView
+      android:id="@+id/reputationChangeTextView"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginStart="8dp"
+      android:gravity="center"
+      android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+      app:layout_constraintStart_toEndOf="@+id/typeTextView"
+      app:layout_constraintTop_toTopOf="@+id/typeTextView"
+      tools:text="+10000" />
+
+  <TextView
+      android:id="@+id/lastAccessDateTextView"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginEnd="16dp"
+      android:layout_marginTop="12dp"
+      android:textAppearance="@style/TextAppearance.AppCompat.Caption"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintTop_toTopOf="parent"
+      tools:text="3:18" />
+
+  <TextView
+      android:id="@+id/postIdTextView"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginBottom="12dp"
+      android:layout_marginTop="4dp"
+      android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+      app:layout_constraintBottom_toBottomOf="parent"
+      app:layout_constraintStart_toStartOf="@+id/typeTextView"
+      app:layout_constraintTop_toBottomOf="@+id/typeTextView"
+      tools:text="15152238" />
+
+</merge>

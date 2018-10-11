@@ -22,7 +22,7 @@ abstract class ListFragment<T> : BaseFragment() {
 
   protected abstract val viewModel: ListViewModel<T>
 
-  protected abstract fun EpoxyController.renderItem(item: T)
+  protected abstract fun EpoxyController.renderList(list: List<T>)
 
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     super.onViewCreated(view, savedInstanceState)
@@ -60,15 +60,14 @@ abstract class ListFragment<T> : BaseFragment() {
       }
     }
 
-    state.list.forEach { item ->
-      renderItem(item)
-    }
+    val list = state.list
+    renderList(list)
 
     if (state.hasMore && state.isConnected) {
       loadingRow {
         // Changing the ID will force it to rebind when new data is loaded even if it is
         // still on screen which will ensure that we trigger loading again.
-        id("loading.${state.list.size}")
+        id("loading.${list.size}")
         onBind { _, _, _ -> viewModel.fetchNextPage() }
       }
     }
